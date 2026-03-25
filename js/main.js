@@ -34,8 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const item = header.closest('.accordion__item');
       const wasOpen = item.classList.contains('open');
       // Close all in same accordion
-      item.closest('.accordion')?.querySelectorAll('.accordion__item').forEach(i => i.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
+      item.closest('.accordion')?.querySelectorAll('.accordion__item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion__header')?.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        item.classList.add('open');
+        header.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 
